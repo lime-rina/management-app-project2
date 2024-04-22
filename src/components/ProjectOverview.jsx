@@ -34,6 +34,7 @@ export default function ProjectOverview({ project, ...props }) {
                 <li className="flex gap-2">
                     <button
                         className="px-6 py-2 rounded-md text-red-300 font-bold hover:underline"
+                        onClick={() => props.deleteProject(projectState)}
                     >
                         Delete
                     </button>
