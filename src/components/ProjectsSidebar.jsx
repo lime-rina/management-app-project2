@@ -1,9 +1,20 @@
-export default function ProjectsSidebar() {
+import ButtonAddProject from "./ButtonAddProject";
+import { textPipe } from "../utils/pipes";
+export default function ProjectsSidebar({ ...props }) {
+    const openProject = () => {
+    }
     return <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
         <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">Your Projects</h2>
         <div>
-            <button className="px-4 py-2 text-xs md:text-base rounded-md bg-stone-700 text-stone-400 hover:bg-stone-600 hover:text-stone-100"> + Add Project</button>
+            <ButtonAddProject onClick={props.onStartAddProject}>+ Add Project</ButtonAddProject>
         </div>
-        <ul></ul>
+
+        <ul className="mt-8">
+            {props?.projects?.map((project) => {
+                return <li key={project.id} className="mt-2 bg-stone-400 p-2 rounded text-sm uppercase font-bold cursor-pointer w-2/3" onClick={openProject}>
+                    {textPipe(project.title)}
+                </li>
+            })}
+        </ul>
     </aside>
 }
