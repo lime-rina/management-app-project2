@@ -5,7 +5,7 @@ import ErrorToaster from "./ErrorToaster";
 const ID_generation = () => { return Math.floor(Math.random() * 100) + 1 }
 
 export default function NewProject({ ...props }) {
-    const [formData, setFormData] = useState({ title: "", description: "", dueDate: "", id: ID_generation() })
+    const [formData, setFormData] = useState({ title: "", description: "", dueDate: "", id: ID_generation(), tasks: [] })
     const [error, setError] = useState(false);
 
     const handleFormData = (e) => {
@@ -28,11 +28,11 @@ export default function NewProject({ ...props }) {
         }
     }
     const handleCancel = () => {
-        setFormData((prev) => { return { ...prev, title: "", description: "", dueDate: "" } })
+        setFormData((prev) => { return { ...prev, title: "", description: "", dueDate: "", tasks: [] } })
     }
 
     const handleReset = () => {
-        setFormData({ title: "", description: "", dueDate: "", id: ID_generation() })
+        setFormData({ title: "", description: "", dueDate: "", id: ID_generation(), tasks: [] })
     }
     return <div className="w-[35rem] mt-16">
         <menu className="flex items-center justify-end gap-4">
@@ -49,7 +49,7 @@ export default function NewProject({ ...props }) {
         <div>
             <Input label="Title" name="title" value={formData.title} onChange={(e) => handleFormData(e)} />
             <Input label="Description" name="description" textarea value={formData.description} onChange={(e) => handleFormData(e)} />
-            <Input label="Due date" name="dueDate" value={formData.dueDate} onChange={(e) => handleFormData(e)} />
+            <Input label="Due date" name="dueDate" type="date" value={formData.dueDate} onChange={(e) => handleFormData(e)} />
         </div>
         <ErrorToaster message="Be sure to have a valid input on all fields!" isVisible={error} onCloseEvent={() => setError(false)} />
 
